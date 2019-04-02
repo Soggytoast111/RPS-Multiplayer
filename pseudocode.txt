@@ -1,0 +1,28 @@
+Game exists in a card.
+
+Game begins in a prompt that has a field:
+-Enter User Name
+-Big button for "Continue"
+
+Continue button uses "push" to firebase to initialize user:
+-Pushes "Username"
+-Pushes "state" as zero -- to indicate that he's looking for opponent
+
+??Firebase listens for other user with state=0 (don't know how to do this yet)??
+
+Firebase returns "key" of opponent and sets both states to 1 (indicating that they are paired)
+-Set "key" to opponent var client-side to track
+
+Prompt player to choose Rock, Paper or Scissors.
+-Selection is pushed to firebase
+
+??Firebase listens for opponent's response (don't know how to do this yet)??
+
+Client listens to opponent's "selection" - when it changes it is downloaded to client.
+
+Client calculates winner, updates stats, deletes user key
+
+
+(CHAT??)
+-Create a div in lower right that listens to opponent's change in "chat" variable
+-Every change is recorded as a new line (up to 6 lines)
