@@ -6,12 +6,12 @@
         <title></title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/css/style.css">
     </head>
     <body>
         <div id="gameCard" class="card" style="width: 25rem;">
-            <img src="assets/images/Top-Image.jpg" class="card-img-top" alt="...">
+            <img id="top-image" src="assets/images/Top-Image.jpg" class="card-img-top" alt="...">
             <div class="card-body">
               <h5 id="title" class="card-title">Rock, Paper, Scissors</h5>
               <div id="input" class="input-group input-group-lg">
@@ -22,8 +22,28 @@
               </div>
               <a href="#" id="continue-btn" class="btn btn-primary">Continue</a>
             </div>
-            <div id="message"></div>
+                 
+            
+            <div id="player-wait-modal" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Please Wait</h5>
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    Waiting for Opponent...
+                  </div>
+                  <div class="modal-footer">
+                  </div>
+                </div>
+              </div>
+            </div>
 
+            <button type="button" id="rock-btn" class="btn btn-outline-secondary hidden">Rock</button>
+            <button type="button" id="paper-btn" class="btn btn-outline-info hidden">Paper</button>
+            <button type="button" id="scissors-btn" class="btn btn-outline-danger hidden">Scissors</button>
           </div>
         
         
