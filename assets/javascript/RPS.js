@@ -37,7 +37,7 @@ $("#continue-btn").on("click", function(event) {
                 else {
                     opponentKey = snapshot.val().playerKey
                 database.ref("game-info").child(playerKey).update({
-                    opponentKey: opponentKey
+                    "opponentKey": opponentKey
                 })
                 .then(function(){
                     database.ref("game-info").child(opponentKey).update({
@@ -46,5 +46,22 @@ $("#continue-btn").on("click", function(event) {
                 })
                 }
             })
+    }).then(function(){
+        database.ref("game-info").child(playerKey).once("value", function(snapshot) {
+            if (snapshot.val().opponentKey == null) {
+                $("#title").fadeOut(1000)
+                $("#input").fadeOut(1000)
+                $("#message").text("Waiting for Opponent").fadeIn(1000)
+            }
+    
+            else {
+                alert("Opponent's key is: " + opponentKey)
+                database.ref("pair").remove()
+            }
+        })
+    
+    
     })
 })
+
+
