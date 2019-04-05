@@ -32,7 +32,7 @@
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
-                  <div class="modal-body">
+                  <div id="modal-body" class="modal-body">
                     Waiting for Opponent...
                   </div>
                   <div class="modal-footer">
@@ -44,6 +44,15 @@
             <button type="button" id="rock-btn" class="btn btn-outline-secondary hidden">Rock</button>
             <button type="button" id="paper-btn" class="btn btn-outline-info hidden">Paper</button>
             <button type="button" id="scissors-btn" class="btn btn-outline-danger hidden">Scissors</button>
+
+            <div id="jumbotron" class="jumbotron hidden">
+              <h1 class="display-12">Rock, Paper, Scissors... SHOOT!</h1>
+              <p id="yourChoice">{youchoose}</p>
+              <hr id="hr" class="my-4">
+              <p id="opponentChoice">{opponentchoose}</p>
+              <h2 class="display-24" id="win-lose">{undefined}</h2>
+              </div>
+
           </div>
         
         

@@ -15,6 +15,8 @@ var opponentKey = ""
 var opponentName = ""
 var gameActive = 0
 var rpsSelect = 0
+var opponentSelect = 0
+var rpsTable = ["Rock", "Paper", "Scissors"]
 
 //Continue Btn Event to initiate game
 $("#continue-btn").on("click", function(event) {
@@ -74,9 +76,7 @@ function gameStart() {
     setTimeout(function() {
     database.ref("game-info").child(playerKey).once("value", function(snapshot){
         opponentKey = snapshot.val().opponentKey
-        console.log(opponentKey)
     }).then(function(snapshot){
-        console.log(snapshot.val().opponentKey)
             database.ref("game-info").child(snapshot.val().opponentKey).once("value", function(snapshot){
             opponentName = snapshot.val().username
             })
@@ -100,17 +100,67 @@ function gameStart() {
 
 function selection(RPS) {
     if (gameActive == 1) {
-    rpsSelect = RPS
-    database.ref("game-info").child(playerKey).update({
-        "selection": RPS
-    })
-    $("#title").fadeOut(1000)
-    $("#rock-btn").fadeOut(1000)
-    $("#paper-btn").fadeOut(1000)
-    $("#scissors-btn").fadeOut(1000)
-}
+        rpsSelect = RPS
+        database.ref("game-info").child(playerKey).update({
+            "selection": RPS
+        })
+
+
+        database.ref("game-info").child(opponentKey).once("value", function(snapshot) {
+            if (snapshot.val().selection == null) {
+                $('#modal-body').text("Waiting for Opponent's Selection...")
+                $('#player-wait-modal').modal('toggle');
+                
+                database.ref("game-info").child(opponentKey).on("child_added", function(snapshot) {
+                    console.log(snapshot.val())
+                    if (snapshot.val() == 1 || 
+                        snapshot.val() == 2 ||
+                        snapshot.val() == 0) {
+                            $("#title").fadeOut(2000)
+                            $("#rock-btn").fadeOut(2000)
+                            $("#paper-btn").fadeOut(2000)
+                            $("#scissors-btn").fadeOut(2000)
+                            opponentSelect = snapshot.val()
+                            $('#player-wait-modal').modal('toggle');
+                            database.ref("game-info").off()
+                            console.log("Checkwinner1-IF")
+                            checkWinner()
+                    }
+                })
+            }
+            else {
+                $("#title").fadeOut(2000)
+                $("#rock-btn").fadeOut(2000)
+                $("#paper-btn").fadeOut(2000)
+                $("#scissors-btn").fadeOut(2000)
+                opponentSelect = snapshot.val().selection
+                console.log("Checkwinner2-ELSE")
+                checkWinner()
+            }
+        })
+    }   
 }
 
-$("#rock-btn").on("click", selection(0))
-$("#paper-btn").on("click", selection(1))
-$("#scissors-btn").on("click", selection(2))
+
+$("#rock-btn").on("click", function(event) {
+    event.preventDefault()
+    selection(0)
+})
+
+$("#paper-btn").on("click", function(event) {
+    event.preventDefault()
+    selection(1)
+})
+
+$("#scissors-btn").on("click", function(event) {
+    event.preventDefault()
+    selection(2)
+})
+
+function checkWinner() {
+    setTimeout(function(){
+        $("#yourChoice").text("You Chose:  " + rpsTable[rpsSelect])
+        $("#opponentChoice").text("Your opponent Chose:  " + rpsTable[opponentSelect])
+        $("#jumbotron").fadeIn(1000)
+        }, 1000)
+}
