@@ -13,3 +13,16 @@
 #jumbotron {
     position: absolute;
 }
+
+#yourChoice {
+    font-size: 24px;
+}
+
+#opponentChoice {
+    font-size: 24px;
+}
+
+#ties {
+    font-size: 24px;
+}
+

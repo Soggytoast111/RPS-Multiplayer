@@ -12,7 +12,7 @@
     <body>
         <div id="gameCard" class="card" style="width: 25rem;">
             <img id="top-image" src="assets/images/Top-Image.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
+            <div id="card-body" class="card-body">
               <h5 id="title" class="card-title">Rock, Paper, Scissors</h5>
               <div id="input" class="input-group input-group-lg">
                 <div class="input-group-prepend">
@@ -46,11 +46,15 @@
             <button type="button" id="scissors-btn" class="btn btn-outline-danger hidden">Scissors</button>
 
             <div id="jumbotron" class="jumbotron hidden">
-              <h1 class="display-12">Rock, Paper, Scissors... SHOOT!</h1>
+              <h1 id="rpsHead" class="display-24">Rock, Paper, Scissors... SHOOT!</h1>
               <p id="yourChoice">{youchoose}</p>
+              <image id="your-img"></image>
               <hr id="hr" class="my-4">
               <p id="opponentChoice">{opponentchoose}</p>
-              <h2 class="display-24" id="win-lose">{undefined}</h2>
+              <image id="opponent-img"></image>
+              <p class="hidden" id="ties"></p>
+              <button id="paButton" type="button" class="btn btn-success hidden">Play Again</button>
+              <button id="resetButton" type="button" class="btn btn-success hidden">Find New Opponent</button>
               </div>
 
           </div>
